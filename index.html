@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>DiffGAN-TTS: High-Fidelity and Efficient Text-to-Speech with Denoising Diffusion GANs</title>
+<meta name="generator" content="Jekyll v3.9.0">
+<meta property="og:title" content="DiffGAN-TTS: High-Fidelity and Efficient Text-to-Speech with Denoising Diffusion GANs">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://anonym-demo.github.io/diffgan">
+<meta property="og:url" content="https://anonym-demo.github.io/diffgan/">
+<meta name="twitter:card" content="summary">
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+    <section class="page-header">
+    <!-- <h1 class="project-name">Demo PAGE</h1> -->
+    <!-- <h2 class="project-tagline"></h2> -->
+      
+      
+    </section>
+
+    <section class="main-content">
+      <h1 id=""><center> DiffGAN-TTS: High-Fidelity and Efficient Text-to-Speech with Denoising Diffusion GANs </center></h1>
+
+<center> Anonymous Authors </center>
+<!-- <center> <sup>2</sup> Tencent AI Lab </center> -->
+
+
+<h2 id="abstract">Abstract</h2>
+<p>
+Denoising diffusion probabilistic models (DDPMs) are expressive generative models and have been successfully applied in various speech synthesis tasks. However, their expensive sampling makes it hard to apply DDPMs in real-time speech processing applications.
+In this paper, we introduce DiffGAN-TTS, a novel DDPM-based text-to-speech (TTS) model able to achieve high-fidelity and efficient speech synthesis. 
+DiffGAN-TTS is built on denoising diffusion generative adversarial networks (GANs), which adopt an expressive model to approximate the denoising distribution. Large denoising steps are allowed in DiffGAN-TTS to make generation process efficient.
+We show with multi-speaker TTS experiments that DiffGAN-TTS is able to generate high-fidelity speech samples within only 4 denoising steps.
+To further accelerate inference, we present an active shallow diffusion mechanism. A two-stage training scheme is designed, where a basic TTS acoustic model trained at stage one provides strong prior information for a DDPM trained at stage two. Our experiments show that DiffGAN-TTS can achieve high synthesis performance with only 1 denoising step.
+</p>
+
+
+<h2><p class="toc_title">Contents</p></h2>
+<div id="toc_container">
+<ul>
+  <li><a href="#0">Proposed Approach Overview</a></li>
+  <li><a href="#1">Visualization of denoising process of DiffGAN-TTS(T=4).</a></li>
+  <li><a href="#2">Visualization of denoising process of DiffGAN-TTS(two-stage).</a></li>
+  <li><a href="#3">Multi-speaker TTS (in Mandarin Chinese)</a></li>
+</ul>
+</div>
+<br>
+
+<a name="0"><h2 id="overview">Proposed Approach Overview</h2></a>
+<div style="text-align: center; width: 1000px;"> 
+<img alt="" src="imgs/training.png" style="display: inline-block; vertical-align: middle;" />
+</div>
+
+<br>
+<br>
+
+<a name="1"><h2 id="visualization1">Visualization of denoising process of DiffGAN-TTS(T=4) at inference.</h2></a>
+<div style="text-align: center; width: 600px;"> 
+<img alt="" src="imgs/mel_gen_1.png" style="display: inline-block; vertical-align: middle;" />
+</div>
+
+<br>
+<br>
+
+<a name="2"><h2 id="visualization2">Visualization of denoising process of DiffGAN-TTS(two-stage) at inference.</h2></a>
+<div style="text-align: center; width: 600px;"> 
+<img alt="" src="imgs/mel_gen_2.png" style="display: inline-block; vertical-align: middle;" />
+</div>
+
+<br>
+<br>
+
+<a name="3"><h2>Multi-speaker TTS (in Mandarin Chinese)</h2></a>
+
+<p> 1. Text: 感情这个东西很痛苦，我现在不太喜欢谈恋爱。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/0.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/0.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>  
+
+<p> 2. Text: 哥们儿别慌，我们等得起。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/1.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>         
+
+<p> 3. Text: 一个个儿傻乎乎的，多纯情多浪漫，真是比白痴还白痴。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/2.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 4. Text: 你先休息，我去单位晃晃，顺便通知下其他哥们儿。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/3.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 5. Text: 你们那儿天真冷，我们这儿还穿单衣呢。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/4.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 6. Text: 你是学习摄影的，可以把你家的小狗当模特。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/5.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 7. Text: 检察官也建议宜尽快带当事人进行治疗。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/6.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+
+  <p> 8. Text: 别人和我讲话，我一开口对方既惊喜又惊讶。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/7.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 9. Text: 灶房里两袋土豆是全家一冬的蔬菜。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/8.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 10. Text: 他选中指挥这一远征队的人是太监郑和。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ground Truth<strong></strong></th>
+      <th style="text-align: center"><strong>FastSpeech 2</strong></th>
+      <th style="text-align: center"><strong>GANSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffSpeech</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=1)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=2)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(T=4)</strong></th>
+      <th style="text-align: center"><strong>DiffGAN-TTS(Two-stage)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/gt/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/fastspeech2/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/ganspeech/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffspeech/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT1/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT2/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffgan2stage/9.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+      
+    </section>
+</body></html>
