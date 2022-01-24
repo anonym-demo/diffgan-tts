@@ -46,9 +46,11 @@ To further accelerate inference, we present an active shallow diffusion mechanis
 <div id="toc_container">
 <ul>
   <li><a href="#0">Proposed Approach Overview</a></li>
-  <li><a href="#1">Visualization of denoising process of DiffGAN-TTS(T=4).</a></li>
-  <li><a href="#2">Visualization of denoising process of DiffGAN-TTS(two-stage).</a></li>
+  <li><a href="#1">Visualization of denoising process of DiffGAN-TTS(T=4)</a></li>
+  <li><a href="#2">Visualization of denoising process of DiffGAN-TTS(two-stage)</a></li>
   <li><a href="#3">Multi-speaker TTS (in Mandarin Chinese)</a></li>
+  <li><a href="#4">Speaker variations in DiffGAN-TTS (T=4)</a></li>
+  <li><a href="#5">Ablation study</a></li>
 </ul>
 </div>
 <br>
@@ -358,6 +360,110 @@ To further accelerate inference, we present an active shallow diffusion mechanis
     </tr>
   </tbody>
 </table> 
-      
-    </section>
+
+<br>
+<br>
+<a name="4"><h2>Speaker variations in DiffGAN-TTS (T=4)</h2></a>
+
+<p> 1. Text: 你是学习摄影的，可以把你家的小狗当模特。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Speaker 1<strong></strong></th>
+      <th style="text-align: center">Speaker 2<strong></strong></th>
+      <th style="text-align: center">Speaker 3<strong></strong></th>
+      <th style="text-align: center">Speaker 4<strong></strong></th>
+      <th style="text-align: center">Speaker 5<strong></strong></th>
+      <th style="text-align: center">Speaker 6<strong></strong></th>
+      <th style="text-align: center">Speaker 7<strong></strong></th>
+      <th style="text-align: center">Speaker 8<strong></strong></th>
+      <th style="text-align: center">Speaker 9<strong></strong></th>
+      <th style="text-align: center">Speaker 10<strong></strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/10speakers/10.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/11.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/12.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/13.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/14.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/15.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/16.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/17.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/18.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/19.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<p> 2. Text: 一个个儿傻乎乎的，多纯情多浪漫，真是比白痴还白痴。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Speaker 1<strong></strong></th>
+      <th style="text-align: center">Speaker 2<strong></strong></th>
+      <th style="text-align: center">Speaker 3<strong></strong></th>
+      <th style="text-align: center">Speaker 4<strong></strong></th>
+      <th style="text-align: center">Speaker 5<strong></strong></th>
+      <th style="text-align: center">Speaker 6<strong></strong></th>
+      <th style="text-align: center">Speaker 7<strong></strong></th>
+      <th style="text-align: center">Speaker 8<strong></strong></th>
+      <th style="text-align: center">Speaker 9<strong></strong></th>
+      <th style="text-align: center">Speaker 10<strong></strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/10speakers/00.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/01.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/02.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/03.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/04.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/05.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/06.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/07.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/08.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/10speakers/09.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+<br>
+<br>
+<a name="5"><h2>Ablation study</h2></a>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Text<strong></strong></th>
+      <th style="text-align: center">别人和我讲话，我一开口对方既惊喜又惊讶。<strong></strong></th>
+      <th style="text-align: center">灶房里两袋土豆是全家一冬的蔬菜。<strong></strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th style="text-align: center">DiffGAN-TTS (T=4)<strong></strong></th>
+      <td style="text-align: left"><audio src="wavs/diffganT4/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/diffganT4/8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">Without Mel loss<strong></strong></th>
+      <td style="text-align: left"><audio src="wavs/abl_woMel/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/abl_woMel/8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">Without feature machting loss<strong></strong></th>
+      <td style="text-align: left"><audio src="wavs/abl_woFm/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/abl_woFm/8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">Add latent variable z<strong></strong></th>
+      <td style="text-align: left"><audio src="wavs/abl_addz/7.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/abl_addz/8.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table> 
+
+</section>
 </body></html>
